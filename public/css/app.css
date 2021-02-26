@@ -1,0 +1,14 @@
+body {
+    font-family: 'Nunito';
+}
+
+.table-hover tbody tr:hover td
+{
+    background-color: #CDCDCD;
+}
+
+.search
+{
+    display: inline-block;
+}
+
