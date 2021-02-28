@@ -4,7 +4,7 @@
 
     @auth
         <div class="page-header">
-            <h1>Vacancies <small>for <b>{{ Auth::user()->name }}</b> (<a href="{{ route('logout') }}"> logout </a>, <a href="{{ url('/password/reset') }}"> reset password </a>)</small></h1>
+            <h1>Vacancies <small>for <b>{{ Auth::user()->name }}</b> (<a href="{{ url('/logout') }}"> logout </a>, <a href="{{ url('/password/reset') }}"> reset password </a>)</small></h1>
             <form action="{{ route('vacancy-create', Auth::user()->id) }}">
                 <button type="submit" class="btn btn-primary">Add vacancy</button>
             </form>

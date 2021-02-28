@@ -15,8 +15,10 @@ use App\Models\Vacancy;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', '\App\Http\Controllers\MainController@index');
+Auth::routes([
+    'confirm' => false,
+    'verify' => false,
+]);
 
 Route::group(['prefix' => '{user_id}', 'middleware' => 'auth'], function () {
     Route::get('/vacancies', '\App\Http\Controllers\MainController@vacancies')->name('vacancies');
@@ -32,10 +34,5 @@ Route::group(['prefix' => '{user_id}', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/search', '\App\Http\Controllers\MainController@search')->name('search')->middleware('auth');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes([
-    'confirm' => false,
-    'verify' => false,
-]);
+Route::get('/', '\App\Http\Controllers\MainController@index');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout')->middleware('auth');
