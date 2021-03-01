@@ -22,14 +22,14 @@ php artisan dusk:install
 ```
 
 #### Testing
+Before testing its recommend to create some temp users and vacancies. Just run(the users password is equal to its email):
+```bash
+php artisan db:seed
+```
 For now you can only test the web-parts of service, but its planning to write tests for other API. Use this:
 ```bash
 php artisan dusk
 php artisan test
-```
-Also if you need some temp users and vacancies just run(the users password is equal to its email):
-```bash
-php artisan db:seed
 ```
 Mailing was tested by [Mailtrap](https://mailtrap.io/).
 # API

@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use App\Models\Vacancy;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -18,7 +19,7 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                    ->assertSee('Login');
+                ->assertSee('Login');
         });
     }
 
@@ -30,7 +31,7 @@ class ExampleTest extends DuskTestCase
     public function testAuthentication()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::first())
                 ->visit('/')
                 ->assertSee('Vacancies');
         });
@@ -44,7 +45,7 @@ class ExampleTest extends DuskTestCase
     public function testLogout()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::first())
                 ->visit('/')
                 ->assertSee('Vacancies')
                 ->logout()
@@ -60,7 +61,7 @@ class ExampleTest extends DuskTestCase
     public function testVacancyCreation()
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::first())
                 ->visit('1/vacancy/create')
                 ->assertSee('Create')
                 ->type('name', 'Company')
