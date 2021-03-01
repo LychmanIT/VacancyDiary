@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', '\App\Http\Controllers\Api\AuthController@register');
 Route::post('/login', '\App\Http\Controllers\Api\AuthController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user', '\App\Http\Controllers\Api\AuthController@user');
+    Route::get('/delete_user', '\App\Http\Controllers\Api\AuthController@delete_user');
 
-Route::apiResource('{id}/vacancy', 'App\Http\Controllers\API\VacancyController')->middleware('auth:api');
-Route::post('/search', 'App\Http\Controllers\API\VacancyController@search')->middleware('auth:api');
+    Route::apiResource('{id}/vacancy', 'App\Http\Controllers\API\VacancyController');
+    Route::post('/search', 'App\Http\Controllers\API\VacancyController@search');
+    Route::get('{id}/vacancy/{vacancy_id}/send_mail', 'App\Http\Controllers\API\VacancyController@send_mail');
+});

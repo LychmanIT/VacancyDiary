@@ -6,6 +6,7 @@ use App\Models\VacancyStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 
 class DatabaseSeeder extends Seeder
@@ -23,7 +24,7 @@ class DatabaseSeeder extends Seeder
         for($i = 0; $i < $user_count; $i++) {
             $name = $faker->name;
             $email = $faker->email;
-            $password = $email;
+            $password = Hash::make($email);
 
             DB::table('users')->insert([
                 'name' => $name,
@@ -31,7 +32,7 @@ class DatabaseSeeder extends Seeder
                 'password' => $password,
             ]);
         }
-        for($i = 0; $i < $user_count; $i++) {
+        for($i = 1; $i < $user_count + 1; $i++) {
             $count = rand(15, 50);
             for ($j = 0; $j < $count; $j++) {
                 $user_id = $i;

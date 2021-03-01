@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VacancyResource;
+use App\Mail\SendFeedback;
 use App\Models\Vacancy;
 use App\Models\VacancyStatus;
+use Illuminate\Support\Facades\Mail;
 use \Validator;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class VacancyController extends Controller
     public function index(Request $request)
     {
         if($request->route('id') == $request->user()->id) {
-            $vacancies = $request->user()->vacancies;
+            $vacancies = Vacancy::where(['user_id' => $request->user()->id])->paginate(5);
             return response(['vacancy' => VacancyResource::collection($vacancies), 'message' => 'Retrieved successfully'], 200);
         }
         else
@@ -125,5 +127,20 @@ class VacancyController extends Controller
             else
                 return response(['error' => 'No vacancies', 404]);
         }
+    }
+
+    public function send_mail(Request $request, $user_id, $vacancy_id)
+    {
+        if ($user_id == $request->user()->id) {
+            $vacancy = Vacancy::where(['id' => $vacancy_id, 'user_id' => $user_id])->first();
+
+            if($vacancy->mailable()) {
+                Mail::to($vacancy->contacts)->send(new SendFeedback());
+
+                return response('Mail sended', 200);
+            }
+            return response(['message' => 'A week has not yet passed']);
+        }
+        return abort(404);
     }
 }

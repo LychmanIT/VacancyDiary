@@ -16,7 +16,7 @@ class MailController extends Controller
         $vacancy = Vacancy::where(['id' => $vacancy_id])->first();
 
         if($vacancy->mailable()) {
-            Mail::to('newuser@example.com')->send(new SendFeedback());
+            Mail::to($vacancy->contacts)->send(new SendFeedback());
         }
 
         return redirect()->route('vacancies', ['user_id' => auth()->user()->id]);

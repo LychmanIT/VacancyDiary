@@ -42,11 +42,15 @@ class AuthController extends Controller
 
     }
 
-    public function change_password(Request $request)
+    public function user(Request $request)
     {
-        return response($request);
-
+        return $request->user();
     }
 
+    public function delete_user(Request $request)
+    {
+        User::where(['id' => $request->user()->id])->delete();
+        return response('User was deleted', 200);
+    }
 
 }
