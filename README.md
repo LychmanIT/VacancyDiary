@@ -26,7 +26,13 @@ Before testing its recommend to create some temp users and vacancies. Just run(t
 ```bash
 php artisan db:seed
 ```
-For now you can only test the web-parts of service, but its planning to write tests for other API. Use this:
+Next start the application create a Dusk-only environment file *.env.dusk.local* with:
+```bash
+APP_URL=http://localhost:8010
+```
+And start the application on the different port:
+$ php artisan serve --port=8010
+For now you can only test the web-parts of service, but its planning to write tests for other API. Now you can run test tools:
 ```bash
 php artisan dusk
 php artisan test
