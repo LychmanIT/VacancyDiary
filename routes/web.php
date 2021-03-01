@@ -35,4 +35,5 @@ Route::group(['prefix' => '{user_id}', 'middleware' => 'auth'], function () {
 
 Route::get('/search', '\App\Http\Controllers\MainController@search')->name('search')->middleware('auth');
 Route::get('/', '\App\Http\Controllers\MainController@index');
+Route::get('/users', '\App\Http\Controllers\UserController@userList')->name('users');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout')->middleware('auth');

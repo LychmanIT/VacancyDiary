@@ -8,6 +8,7 @@
                 <p>Sign up to continue.</p>
                 <p><a class="btn btn-primary btn-lg" href="/login" role="button">Login</a></p>
                 <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/users" role="button">Users stats</a></p>
             </div>
         </div>
 
