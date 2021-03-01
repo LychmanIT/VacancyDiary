@@ -20,6 +20,7 @@ Then, if necessary, install the testing tool [dusk](https://github.com/laravel/d
 composer require --dev laravel/dusk
 php artisan dusk:install
 ```
+Dont forget to create *.env* file with your configuration data.
 
 #### Testing
 Before testing its recommend to create some temp users and vacancies. Just run(the users password is equal to its email):
