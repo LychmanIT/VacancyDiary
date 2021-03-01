@@ -1,16 +1,40 @@
 # About
 
-VacancyDiary is a service that provides API
+VacancyDiary is a web-service that helps you to store and monitoring information about your work offers.
 
-## Installation
+## Getting started
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+#### Installation
 
+First off all install npm dependencies:
 ```bash
-pip install foobar
+npm install
+```
+Next we will need [passport](https://github.com/laravel/passport) to provide Bearer Authorization:
+```bash
+composer require laravel/passport
+php artisan passport:install
+```
+Then, if necessary, install the testing tool [dusk](https://github.com/laravel/dusk):  
+```bash
+composer require --dev laravel/dusk
+php artisan dusk:install
 ```
 
+#### Testing
+For now you can only test the web-parts of service, but its planning to write tests for other API. Use this:
+```bash
+php artisan dusk
+php artisan test
+```
+Also if you need some temp users and vacancies just run(the users password is equal to its email):
+```bash
+php artisan db:seed
+```
+Mailing was tested by [Mailtrap](https://mailtrap.io/).
 # API
+All web functionality is available via API (except user password recovery, it is available only on the web).
+Tested with [Postman](https://www.postman.com/).
 
 ## Register
 **You send**: Your register credentials. **You get**: An instance of created user and API-Token with wich you can make further actions.
@@ -79,7 +103,7 @@ GET /delete_user/
 
 #### Response
 
-21421421
+"User was deleted"
 
 ## Vacancy show
 **You get**: Vacancy instance by id.
@@ -228,7 +252,6 @@ GET /{user_id}/vacancy/{vacancy_id}/sendMail
 {
 "message": "Mail sended"
 }
-
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

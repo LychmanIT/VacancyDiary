@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use App\Models\User;
 use App\Models\Vacancy;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -87,9 +86,9 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
-                ->type('Name', 'newuser4321')
-                ->type('Email', 'secret@gmail.com')
-                ->type('Password', 'some_password123')
+                ->type('name', 'newuser4321')
+                ->type('email', 'secret@gmail.com')
+                ->type('password', 'some_password123')
                 ->type('password_confirmation', 'some_password123')
                 ->press('Register')
                 ->assertSee('Vacancies');
